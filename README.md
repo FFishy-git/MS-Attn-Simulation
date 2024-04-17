@@ -7,5 +7,5 @@ requirements.tex freezes the packages used in this project.
 # Simulation
 Run training.py after modifying the line 
 ```python
-wandb.init(project="<your project name>", entity="<your entity name>", config=hparams_dict)"
+wandb.init(project="<your project name>", entity="<your entity name>", config=hparams_dict)
 ```
