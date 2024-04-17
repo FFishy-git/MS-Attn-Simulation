@@ -1,5 +1,5 @@
 # MS-Attn-Simulation
-Simulation code for paper "Training Dynamics of Multi-Head Softmax Attention for In-Context Learning: Emergence, Convergence, and Optimality"
+Simulation code for paper "Training Dynamics of Multi-Head Softmax Attention for In-Context Learning: Emergence, Convergence, and Optimality". Arxiv: [paperlink](https://arxiv.org/abs/2402.19442)
 
 # Installation
 requirements.tex freezes the packages used in this project. 
