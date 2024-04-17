@@ -10,7 +10,7 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 
 import torch
-import visdom # http://localhost:8097
+import visdom
 import numpy as np
 
 from AttentionNetwork import AttentionNetwork
@@ -29,7 +29,7 @@ if logto == "visdom":
     vis.close(env="main")
 elif logto == "wandb":
     # initialize wandb
-    wandb.init(project="multi-head-transformer", entity="g-g", config=hparams_dict)
+    wandb.init(project="<your project name>", entity="<your entity name>", config=hparams_dict)
     # clear wandb
     # wandb.finish()
     # initialize visdom
