@@ -3,3 +3,6 @@ Simulation code for paper "Training Dynamics of Multi-Head Softmax Attention for
 
 # Installation
 requirements.tex freezes the packages used in this project. 
+
+# Simulation
+Run training.py
