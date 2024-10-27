@@ -1,7 +1,7 @@
 import sys
 import os
 import wandb
-
+import time
 # getting the name of the directory where the this file is present.
 current = os.path.dirname(os.path.realpath(__file__))
 # Getting the parent directory name where the current directory is present.
@@ -22,6 +22,16 @@ hparams_dict = generate_attributedict(hparams)
 
 logto = "wandb" # "visdom" or "wandb"
 
+training_name = (
+    'L' + str(hparams_dict.model.L) +
+    'dx' + str(hparams_dict.model.dx) +
+    'dy' + str(hparams_dict.model.dy) +
+    'H' + str(hparams_dict.model.num_heads) +
+    'lr' + str(hparams_dict.train.learning_rate) +
+    'opt' + hparams_dict.train.optimizer +
+    '-' + time.strftime("%m%d-%H%M%S")
+)
+
 if logto == "visdom":
     # initialize visdom
     vis = visdom.Visdom()
@@ -29,7 +39,11 @@ if logto == "visdom":
     vis.close(env="main")
 elif logto == "wandb":
     # initialize wandb
-    wandb.init(project="LinearReg_MH_1layer", entity="siyuc-yale", config=hparams_dict)
+    wandb.init(
+        project="LinearReg_MH_1layer", 
+        entity="siyuc-yale", 
+        config=hparams_dict, 
+        name=training_name,)
     # clear wandb
     # wandb.finish()
     # initialize visdom

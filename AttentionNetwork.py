@@ -86,11 +86,16 @@ class AttentionNetwork(MultiHeadAttention):
         # initialize q_proj to be small identity matrix and repeat along the first dimension for num_heads times
         if self.q_k_v_o_proj_enabled[0]:
             self.q_proj.weight.data = torch.eye(self.d).repeat(self._num_heads, 1) * self.qk_init
+            # allow each head to be randomly initialized
+            for h in range(self._num_heads):
+                self.q_proj.weight.data[h * self.d: (h+1) * self.d, :] = torch.eye(self.d) * self.qk_init * torch.randn(1)
 
         # initialize k_proj to be small identity matrix and repeat along the first dimension for num_heads times
         if self.q_k_v_o_proj_enabled[1]:
             self.k_proj.weight.data = torch.eye(self.d).repeat(self._num_heads, 1) * self.qk_init
-
+            # allow each head to be randomly initialized
+            for h in range(self._num_heads):
+                self.k_proj.weight.data[h * self.d: (h+1) * self.d, :] = torch.eye(self.d) * self.qk_init * torch.randn(1)
         # initialize v_proj to be diagonal matrix and repeat the process along the first dimension for num_heads times
         
         assert self._num_heads >= self.dy
