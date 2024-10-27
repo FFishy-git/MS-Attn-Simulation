@@ -1,9 +1,9 @@
 hparams = {
     "model": {
         "dx": 50,
-        "dy": 3,
+        "dy": 1,
         "L": 100, 
-        "num_heads": 3,
+        "num_heads": 5,
         "use_bias": False,
         "dropout_rate": 0.0,
         "attention_type": "softmax",
@@ -14,7 +14,7 @@ hparams = {
         "noise_std": 0.0,
     },
     "train": {
-        "optimizer": "Adam",
+        "optimizer": "AdamW",
         "weight_decay": 0.01,
         "gradient_clip": 1.0,
         "momentum": 0.0,

@@ -29,7 +29,7 @@ if logto == "visdom":
     vis.close(env="main")
 elif logto == "wandb":
     # initialize wandb
-    wandb.init(project="<your project name>", entity="<your entity name>", config=hparams_dict)
+    wandb.init(project="LinearReg_MH_1layer", entity="siyuc-yale", config=hparams_dict)
     # clear wandb
     # wandb.finish()
     # initialize visdom
@@ -68,11 +68,27 @@ data_generator = DataGenerator(
 )
 
 # initialize optimizer
-optimizer = torch.optim.SGD(
-    model.parameters(),
-    lr=hparams_dict.train.learning_rate,
-    momentum=hparams_dict.train.momentum,
-)
+optimizer_choice = hparams_dict.train.optimizer  # "SGD", "Adam", or "AdamW"
+
+if optimizer_choice == "SGD":
+    optimizer = torch.optim.SGD(
+        model.parameters(),
+        lr=hparams_dict.train.learning_rate,
+        momentum=hparams_dict.train.momentum,
+    )
+elif optimizer_choice == "Adam":
+    optimizer = torch.optim.Adam(
+        model.parameters(),
+        lr=hparams_dict.train.learning_rate,
+    )
+elif optimizer_choice == "AdamW":
+    optimizer = torch.optim.AdamW(
+        model.parameters(),
+        lr=hparams_dict.train.learning_rate,
+        weight_decay=hparams_dict.train.weight_decay,
+    )
+else:
+    raise ValueError(f"Unsupported optimizer choice: {optimizer_choice}")
 
 # initialize learning rate scheduler
 scheduler = AdaptiveLRScheduler(
