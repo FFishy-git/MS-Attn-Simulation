@@ -1,2 +1,4 @@
 __pycache__/
 exp.sh
+wandb/
+slurm_output/
